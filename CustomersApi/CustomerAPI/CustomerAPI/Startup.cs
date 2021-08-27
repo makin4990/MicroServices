@@ -1,32 +1,21 @@
-using Business.Abstract;
-using Business.Concrete;
 using Core.DependencyResolvers;
 using Core.Extensions;
 using Core.Utilities.IoC;
-using Core.Utilities.Security.Encryption;
-using Core.Utilities.Security.JWT;
-using DataAccess.Abstract;
-using DataAccess.Concrete.EntityFramework;
-using MediatR;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebAPI
+namespace CustomerAPI
 {
     public class Startup
     {
@@ -39,28 +28,23 @@ namespace WebAPI
 
         public void ConfigureServices(IServiceCollection services)
         {
-            
+
             services.AddControllers();
             services.AddMvc(option => option.EnableEndpointRouting = false)
                 .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
                 .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
-           
 
 
             services.AddCors();
-            
 
-            services.AddDependencyResolvers(new ICoreModule[] 
+            services.AddDependencyResolvers(new ICoreModule[]
             {
                new CoreModule()
             });
-            services.AddMediatR(typeof(Startup));
-            services.AddDbContext<TesodevVtContext>(options => options.UseSqlServer(Configuration.GetConnectionString(@"Server=BILGISLEM;Database=TesodevDB;Trusted_Connection=true")))
-                    .AddControllers();
 
         }
 
-      
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -83,7 +67,7 @@ namespace WebAPI
             {
                 endpoints.MapControllers();
             });
-          
+
         }
     }
 }

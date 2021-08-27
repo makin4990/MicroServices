@@ -17,7 +17,7 @@ namespace UnitTest
                    {
                        var options = new DbContextOptionsBuilder<TesodevVtContext>()
                                                               .UseInMemoryDatabase("testMemory").Options;
-                       services.AddScoped(provider => new TesodevVtContext(options));
+                       services.AddScoped<TesodevVtContext>(provider => new OrderTestContext(options));
 
                        var serviceProvider = services.BuildServiceProvider();
                        using var scope = serviceProvider.CreateScope();

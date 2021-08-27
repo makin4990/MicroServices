@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+	<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.0-preview1.19508.20" />
+	<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="3.1.16" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.16" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
@@ -23,7 +25,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\OrdersApi\DataAccess\DataAccess.csproj" />
-    <ProjectReference Include="..\..\..\OrdersApi\WebAPI\OrderAPI.csproj" />
+    <ProjectReference Include="..\..\..\OrdersApi\OrderAPI\OrderAPI.csproj" />
   </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
 
 </Project>

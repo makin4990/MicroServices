@@ -24,8 +24,8 @@ namespace Entities.Concrete
         public string Status { get; set; }
         public virtual Address Address { get; set; }
         public virtual Product Product { get; set; }
-        //public Guid ProductId { get; set; }
-        //public Guid AddressId { get; set; }
+        public Guid ProductId { get; set; }
+        public Guid AddressId { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         

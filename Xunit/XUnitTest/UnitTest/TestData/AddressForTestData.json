@@ -1,0 +1,26 @@
+[
+  {
+    "Id": "242d928b-b201-ec11-ad1c-204ef6a9b4ee",
+    "AddressLine": "Çifte Havuzlar Mah. Eski Londra Asfaltý Cad. Kuluçka Merkezi D2 Blok No: 151/1F Ýç Kapý No: 2B03 Esenler",
+    "City": "Ýstanbul",
+    "Country": "Turkey",
+    "CityCode": 34220,
+    "CustomerId": "6c89b0db-8901-ec11-ad1c-204ef6a9b4ee"
+  },
+  {
+    "Id": "232d928b-b201-ec11-ad1c-204ef6a9b4ee",
+    "AddressLine": "Mimar Sinan Mah 2339. Sok",
+    "City": "Aydýn",
+    "Country": "Turkey",
+    "CityCode": 9100,
+    "CustomerId": "d4382973-b805-4b63-ab19-c2b369565667"
+  },
+  {
+    "Id": "0e6d89af-c4c4-4954-6b30-08d9663d44e8",
+    "AddressLine": "Çifte Havuzlar Mah. Eski Londra Asfaltý Cad. Kuluçka Merkezi D2 Blok No: 151/1F Ýç Kapý No: 2B03 Esenler",
+    "City": "Ýstanbul",
+    "Country": "Turkey",
+    "CityCode": 34220,
+    "CustomerId": "6c89b0db-8901-ec11-ad1c-204ef6a9b4ee"
+  }
+]

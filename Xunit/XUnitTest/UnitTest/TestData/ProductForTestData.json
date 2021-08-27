@@ -1,0 +1,17 @@
+[
+  {
+    "Id": "010e9eff-b401-ec11-ad1c-204ef6a9b4ee",
+    "ImageUrl": "/env/img",
+    "Name": "product1"
+  },
+  {
+    "Id": "262fb80c-b501-ec11-ad1c-204ef6a9b4ee",
+    "ImageUrl": "/env/img",
+    "Name": "product2"
+  },
+  {
+    "Id": "e01c9a2d-353e-41f6-0b86-08d9663d44ea",
+    "ImageUrl": "/env/img",
+    "Name": "product4"
+  }
+]

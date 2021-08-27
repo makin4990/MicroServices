@@ -1,13 +1,10 @@
 ﻿using Business.Abstract;
 using Entities.Concrete;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace WebAPI.Controllers
+
+namespace CustomerAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -20,10 +17,10 @@ namespace WebAPI.Controllers
             _customerService = customerService;
         }
 
-        [HttpGet("getallcustomer")]
+        [HttpGet("getallcustomers")]
         public IActionResult GetAllCustomer()
         {
-           var result = _customerService.GetAllCustomerWithAddress();
+            var result = _customerService.GetAllCustomerWithAddress();
             return result.Success ? Ok(result) : BadRequest();
 
         }
@@ -33,7 +30,7 @@ namespace WebAPI.Controllers
             var result = _customerService.GetCustomerByIdWithAddress(customerId);
             return result.Success ? Ok(result) : BadRequest();
         }
-        
+
         [HttpGet("validate")]
         public IActionResult Validate(Guid customerId)
         {
@@ -57,10 +54,10 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete("delete")]
-        public  IActionResult Delete(Guid customerId)
+        public IActionResult Delete(Guid customerId)
         {
             var result = _customerService.Delete(customerId);
-            return result.Success? Ok(result) : BadRequest();
+            return result.Success ? Ok(result) : BadRequest();
         }
     }
 }

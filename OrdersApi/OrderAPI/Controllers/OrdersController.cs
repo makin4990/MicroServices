@@ -22,12 +22,12 @@ namespace OrderAPI.Controllers
     public class OrdersController : ControllerBase
     {
 
-        IOrderService _orderService;
+
         IMediator _mediator;
 
-        public OrdersController(IOrderService orderService, IMediator mediator)
+        public OrdersController(IMediator mediator)
         {
-            _orderService = orderService;
+
             _mediator = mediator;
         }
         [HttpPost("create")]
@@ -51,10 +51,15 @@ namespace OrderAPI.Controllers
         }
         [HttpGet("getallorders")]
         public IActionResult GetAllOrders()
+        
+        
+        
+        
+        
         {
             var query = new GetAllOrdersQuery();
             var result = _mediator.Send(query);
-            return result.Result.Success? Ok(result.Result) : BadRequest();
+            return result.Result.Success ? Ok(result.Result) : BadRequest();
         }
         [HttpGet("getordersbycustomerid")]
         public IActionResult GetOrdersByCustomerId(Guid customerId)
@@ -73,7 +78,7 @@ namespace OrderAPI.Controllers
         [HttpGet("changestatus")]
         public IActionResult ChangeStatus(Guid orderId, string status)
         {
-            var query = new ChangeOrderStatusCommand() { OrderId=orderId,Status=status };
+            var query = new ChangeOrderStatusCommand() { OrderId = orderId, Status = status };
 
             var result = _mediator.Send(query);
             return result.Result.Success ? Ok(result.Result) : BadRequest();

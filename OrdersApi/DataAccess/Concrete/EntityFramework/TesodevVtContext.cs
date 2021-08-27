@@ -19,7 +19,11 @@ namespace DataAccess.Concrete.EntityFramework
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=BILGISLEM;Database=TesodevDB;Trusted_Connection=true");
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer(@"Server=BILGISLEM;Database=TesodevDB;Trusted_Connection=true");
+            }
+            
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -32,7 +36,7 @@ namespace DataAccess.Concrete.EntityFramework
 
         }
 
-       // public DbSet<Customer> Customers { get; set; }
+       
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<Product> Products { get; set; }

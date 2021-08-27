@@ -1,11 +1,11 @@
 ﻿using Entities.Concrete;
 using Newtonsoft.Json;
+using OrderAPI;
 using System;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using WebAPI;
 using Xunit;
 
 
@@ -32,18 +32,7 @@ namespace UnitTest
         [Fact]
         public async Task post_request_test()
         {
-            var order = new Order
-            {
-                Id = Guid.NewGuid()
-               ,CustomerId= new Guid("6c89b0db-8901-ec11-ad1c-204ef6a9b4ee")
-               ,Quantity=249
-               ,Price=999
-               ,Status="Waiting for shipping"
-               ,CreatedAt = new DateTime(2021,8,24)
-               ,UpdatedAt = new DateTime(2021, 8, 24)
-
-            };
-            order.Address = new Address
+            Address newAddress = new Address
             {
                 AddressLine = "Aydın Organize Sanayi Bölgesi Umurlu/Efeler"
                 ,
@@ -57,13 +46,27 @@ namespace UnitTest
                 ,
                 CustomerId = new Guid("6c89b0db-8901-ec11-ad1c-204ef6a9b4ee")
             };
-            order.Product = new Product
+            Product newProduct = new Product
             {
                 Id = new Guid("010e9eff-b401-ec11-ad1c-204ef6a9b4ee"),
                 ImageUrl = "/env/img",
                 Name = "product1"
 
             };
+            var order = new Order
+            {
+                Id = Guid.NewGuid()
+               , CustomerId = new Guid("6c89b0db-8901-ec11-ad1c-204ef6a9b4ee")
+               , Quantity = 249
+               , Price = 999
+               , Status = "Waiting for shipping"
+               ,Address = newAddress
+               ,Product=newProduct
+               ,CreatedAt = new DateTime(2021,8,24)
+               ,UpdatedAt = new DateTime(2021, 8, 24)
+
+            };
+             
             var client = factory.CreateClient();
             var httpContent = new StringContent(JsonConvert.SerializeObject(order), Encoding.UTF8, "application/json");
             var response = await client.PostAsync("/api/orders/create", httpContent);
@@ -93,27 +96,27 @@ namespace UnitTest
                 UpdatedAt = new DateTime(2021, 8, 24)
 
             };
-            request.Address = new Address
-            {
-                AddressLine = "Aydın Organize Sanayi Bölgesi Umurlu/Efeler"
-                ,
-                Id = Guid.NewGuid()
-                ,
-                City = "Aydın"
-                ,
-                Country = "Turkey"
-                ,
-                CityCode = 9100
-                ,
-                CustomerId = new Guid("6c89b0db-8901-ec11-ad1c-204ef6a9b4ee")
-            };
-            request.Product = new Product
-            {
-                Id = new Guid("010e9eff-b401-ec11-ad1c-204ef6a9b4ee"),
-                ImageUrl = "/env/img",
-                Name = "product1"
+            //request.Address = new Address
+            //{
+            //    AddressLine = "Aydın Organize Sanayi Bölgesi Umurlu/Efeler"
+            //    ,
+            //    Id = Guid.NewGuid()
+            //    ,
+            //    City = "Aydın"
+            //    ,
+            //    Country = "Turkey"
+            //    ,
+            //    CityCode = 9100
+            //    ,
+            //    CustomerId = new Guid("6c89b0db-8901-ec11-ad1c-204ef6a9b4ee")
+            //};
+            //request.Product = new Product
+            //{
+            //    Id = new Guid("010e9eff-b401-ec11-ad1c-204ef6a9b4ee"),
+            //    ImageUrl = "/env/img",
+            //    Name = "product1"
 
-            };
+            //};
             var httpContent = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
             //Assert.NotNull(headerLocation.PathAndQuery);
             var response = await client.PutAsync("api/orders/update", httpContent);
@@ -124,7 +127,7 @@ namespace UnitTest
         public async Task get_by_id_request_test()
         {
             var client = factory.CreateClient();
-            var response = await client.GetAsync("/api/orders/getbyorderid=48451c21-b501-ec11-ad1c-204ef6a9b4ee");
+            var response = await client.GetAsync("/api/orders/getbyorderid?orderid=48451c21-b501-ec11-ad1c-204ef6a9b4ee");
             var strinResult = await response.Content.ReadAsStringAsync();
             var jsonObject = JsonConvert.DeserializeObject<Order>(strinResult);
             Assert.Equal("3900", jsonObject.Price.ToString());

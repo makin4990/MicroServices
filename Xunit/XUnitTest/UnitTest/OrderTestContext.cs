@@ -18,8 +18,12 @@ namespace UnitTest
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Order>().HasOne(o => o.Product);
+            modelBuilder.Entity<Order>().HasOne(o => o.Address);
             base.OnModelCreating(modelBuilder);
-            seedData<Order>(modelBuilder, "../../../TestData/TestData.json");
+            seedData<Address>(modelBuilder, "../../../TestData/AddressForTestData.json");
+            seedData<Product>(modelBuilder, "../../../TestData/ProductForTestData.json");
+            seedData<Order>(modelBuilder, "../../../TestData/OrderForTestData.json");
         }
 
         private void seedData<T>(ModelBuilder modelBuilder, string file) where T : class
@@ -29,6 +33,7 @@ namespace UnitTest
                 var json = reader.ReadToEnd();
                 var data = JsonConvert.DeserializeObject<T[]>(json);
                 modelBuilder.Entity<T>().HasData(data);
+
             }
 
         }
