@@ -28,12 +28,8 @@ namespace DataAccess.Concrete.EntityFramework
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<Customer>()
-            //    .HasMany(c => c.Addresses)
-            //    .WithOne(c => c.Customer)
-            //    .HasForeignKey(c => c.CustomerId);
-           // modelBuilder.Entity<Address>(builder => builder.HasNoKey());
-
+            modelBuilder.Entity<Order>().HasOne(o => o.Product);
+            modelBuilder.Entity<Order>().HasOne(o => o.Address);
         }
 
        

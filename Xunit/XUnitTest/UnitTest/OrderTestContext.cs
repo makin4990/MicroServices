@@ -9,20 +9,23 @@ using System.Text;
 
 namespace UnitTest
 {
-    public class OrderTestContext: TesodevVtContext
-    {
-        public OrderTestContext(DbContextOptions<TesodevVtContext> options) : base(options)
-        {
 
+
+    public class OrderTestContext:DbContext
+    {
+
+        
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseInMemoryDatabase("deneme");
+            base.OnConfiguring(optionsBuilder);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Order>().HasOne(o => o.Product);
             modelBuilder.Entity<Order>().HasOne(o => o.Address);
-            base.OnModelCreating(modelBuilder);
-            seedData<Address>(modelBuilder, "../../../TestData/AddressForTestData.json");
-            seedData<Product>(modelBuilder, "../../../TestData/ProductForTestData.json");
             seedData<Order>(modelBuilder, "../../../TestData/OrderForTestData.json");
         }
 
@@ -33,9 +36,12 @@ namespace UnitTest
                 var json = reader.ReadToEnd();
                 var data = JsonConvert.DeserializeObject<T[]>(json);
                 modelBuilder.Entity<T>().HasData(data);
-
             }
 
         }
+
+        DbSet<Order> Orders { get; set; }
+        DbSet<Address> Addresses { get; set; }
+        DbSet<Product> Products { get; set; }
     }
 }

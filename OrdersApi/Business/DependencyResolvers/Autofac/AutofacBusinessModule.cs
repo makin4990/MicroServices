@@ -1,17 +1,11 @@
 ﻿using Autofac;
 using Autofac.Extras.DynamicProxy;
 using Business.Abstract;
-using Business.CCS;
 using Business.Concrete;
 using Castle.DynamicProxy;
 using Core.Utilities.Interceptors;
-using Core.Utilities.Security.JWT;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
-using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Business.DependencyResolvers.Autofac
 {
@@ -22,12 +16,6 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<OrderManager>().As<IOrderService>().SingleInstance();
             builder.RegisterType<EfOrderDal>().As<IOrderDal>().SingleInstance();
 
-
-            //builder.RegisterType<CustomerManager>().As<ICustomerService>().SingleInstance();
-            //builder.RegisterType<EfCustomerDal>().As<ICustomerDal>().SingleInstance();
-
-            //builder.RegisterType<AddressManager>().As<IAddressService>().SingleInstance();
-            //builder.RegisterType<EfAddressDal>().As<IAddressDal>().SingleInstance();
 
            
             
